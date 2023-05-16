@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Кутия</title>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<script src="three.min.js"></script>
+	<script src="OrbitControls.js"></script>
+	<script src="vax.js"></script>
+	<script src="StereoEffect.js"></script>
+</head>
+
+<body>
+
+	<script>
+		//vaxInitParallax(1);
+		vaxInit({ antialias: true, alpha: true });
+
+		camera.position.set(0, 0, 0);
+		camera.lookAt(new THREE.Vector3(0, 0, 0));
+		light.position.set(0, 0, 0);
+
+		camera.fov = 50;
+		onWindowResize();
+
+
+
+		var box = new THREE.Mesh(new THREE.BoxGeometry(500, 500, 500),
+			new THREE.MeshStandardMaterial({
+				color: 'green',
+				side: THREE.DoubleSide
+			}));
+		scene.add(box);
+
+
+		var n = 200;
+		//otpr
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(a, b, -220);
+
+
+			scene.add(cone);
+		}
+		//otz
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(a, b, 220);
+
+
+			scene.add(cone);
+		}
+		//l
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(220, b, a);
+
+
+			scene.add(cone);
+		}
+		//d
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(-220, b, a);
+
+
+			scene.add(cone);
+		}
+		//d
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(a, 220, b);
+
+
+			scene.add(cone);
+		}
+		//g
+		for (var i = 0; i < n; i++) {
+
+			var cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 20),
+				new THREE.MeshStandardMaterial({
+					color: THREE.MathUtils.randInt(0, 0xFFFFFF),
+				}));
+
+
+			var a = THREE.MathUtils.randFloat(-220, 220);
+			var b = THREE.MathUtils.randFloat(-220, 220);
+			cone.position.set(a, -220, b);
+
+
+			scene.add(cone);
+		}
+
+
+		window.addEventListener("deviceorientation", deviceOrientation, true);
+
+		function deviceOrientation(event) {
+
+			var alpha = event.alpha,
+				gamma = event.gamma;
+
+			if (alpha === null) return;
+
+
+			if (gamma >= 0)
+				gamma = 90 - gamma;
+			else {
+				alpha = alpha + 180;
+				gamma = -90 - gamma;
+			}
+
+
+			alpha = THREE.MathUtils.degToRad(alpha);
+			gamma = THREE.MathUtils.degToRad(gamma);
+
+
+			camera.rotation.set(gamma, alpha, 0, 'YXZ');
+		}
+
+	</script>
+
+</body>
+
+</html>
